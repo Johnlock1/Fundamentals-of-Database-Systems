@@ -1,0 +1,50 @@
+5.1. Describe the six clauses in the syntax of an SQL retrieval query.
+Show what type of constructs can be specified in each of the six clauses.
+Which of the six clauses are required and which are optional?
+
+SELECT (DISTINCT) <attribute list>, <aggregate functions> (alias)
+FROM  <table(s)> (join condition) (alias)
+|WHERE  <condition> (AND, EXISTS, NOT EXISTS, IN) ()
+|GROUP BY <group attribute>
+|HAVING <group selection condition>
+|ORDER BY <attribute> (order: ASC, DESC)
+
+
+----
+5.2. Describe conceptually how an SQL retrieval query will be executed by
+specifying the conceptual order of executing each of the six clauses.
+
+First, DBMS check the FROM clause to find the tables to retrieve from and perform
+possible joins. Then it applies the condition specified in WHERE clause to filter
+the tuples. The it applies GROUP BY and HAVING, it selects attributes listed in
+the SELECT clause and calculates possible aggregate functions. Lastly, it orders
+the retrieved tuples by the attributes assigned in ORDER BY clause.
+
+
+----
+5.3. Discuss how NULLs are treated in comparison operators in SQL. How are
+NULLs treated when aggregate functions are applied in an SQL query? How are
+NULLs treated if they exist in grouping attributes?
+
+- TRUE AND NULL = UNKNOWN
+- FALSE AND NULL = FALSE
+- NULL AND NULL = UNKNOWN
+- TRUE OR NULL = TRUE
+- FALSE OR NULL = UNKNOWN
+- NULL OR NULL = UNKNOWN
+
+- NULLs are not considered when aggregate functions are applied in an SQL query.
+
+- If NULLs exist in grouping attributes, a separate group call NULL is created
+and groups all tuples with NULL values.
+
+
+---
+5.4. Discuss how each of the following constructs is used in SQL, and discuss the
+various options for each construct. Specify what each construct is useful for.
+a. Nested queries.
+b. Joined tables and outer joins.
+c. Aggregate functions and grouping.
+d. Triggers.
+e. Assertions and how they differ from triggers.
+f. Views and their updatability. g. Schema change commands.
